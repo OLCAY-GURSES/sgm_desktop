@@ -8,7 +8,7 @@ class PatientDashboard(tk.Tk):
         self.token = token
         self.title("Tableau de bord des patients")
         self.geometry("800x500")
-        self.iconbitmap('C:\\Users\\SESA546828\\PycharmProjects\\SoigneMoi\\DesktopApp\\icons.ico')
+        self.iconbitmap('C:\\Users\\SESA546828\\PycharmProjects\\sgm_desktop\\DesktopApp\\icons.ico')
         self.menubar = tk.Menu(self)
         self.config(menu=self.menubar)
 
@@ -90,7 +90,7 @@ class PatientDashboard(tk.Tk):
         headers = {
             'Authorization': f'Token {self.token}',
         }
-
+        #response = requests.get('http://localhost:8000/api/secretary/dashboard/', headers=headers)
         response = requests.get('https://sgmlille.pythonanywhere.com/api/secretary/dashboard/', headers=headers)
         if response.status_code == 200:
             data = response.json()
@@ -132,7 +132,7 @@ class LoginWindow(tk.Tk):
         super().__init__()
         self.title("SoigneMoi")
         self.geometry("800x600")
-        self.iconbitmap('C:\\Users\\SESA546828\\PycharmProjects\\SoigneMoi\\DesktopApp\\icons.ico')
+        self.iconbitmap('C:\\Users\\SESA546828\\PycharmProjects\\sgm_desktop\\DesktopApp\\icons.ico')
 
         self.login_frame = tk.Frame(self)
         self.login_frame.pack(expand=True, pady=50)
@@ -195,6 +195,7 @@ class LoginWindow(tk.Tk):
         username = self.username_entry.get()
         password = self.password_entry.get()
 
+        #api_url = "http://localhost:8000/api/"
         api_url = "https://sgmlille.pythonanywhere.com/api/"
         response = requests.post(f"{api_url}api-token-auth/", data={'username': username, 'password': password}, timeout=10)
 
